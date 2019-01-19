@@ -1,7 +1,7 @@
 var translationObj = {
   EN: {
     Form: [
-      "Your Team Number",
+      "Nicolet Fear Team",
       "Robot Team Number",
       "Test",
       "Practice Field",
