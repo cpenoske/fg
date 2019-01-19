@@ -10,7 +10,7 @@ var eventConfig =
     {
       eventName:"habLine2",
       eventTitle:chosenTranslationObj.EventTitles[1],
-      eventKey:"b",
+      eventKey:"habLine2",
       variableLink:[]
     },
     {
