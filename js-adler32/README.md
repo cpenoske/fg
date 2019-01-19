@@ -1,44 +1,139 @@
-# frc-mscout-client-2019
+# adler32
 
-# Chief Delphi Post: https://www.chiefdelphi.com/t/first-match-scouting-system-for-2019/336563
+Signed ADLER-32 algorithm implementation in JS (for the browser and nodejs).
+Emphasis on correctness, performance, and IE6+ support.
 
-FRC Match Scouting System, Core Client Framework for mobile to laptop data transfer system via qrcode
+## Installation
 
-Laptop System Repository: https://github.com/Alexbay218/frc-mscout-core/
+With [npm](https://www.npmjs.org/package/adler-32):
 
-## Simple Tutorial:
+```bash
+$ npm install adler-32
+```
 
-You need a laptop running Windows with a webcam and a device that can access the web (phone preferred).
+In the browser:
 
+```html
+<script src="adler32.js"></script>
+```
 
-Download the laptop program on https://github.com/Alexbay218/frc-mscout-core/releases/tag/v1.0.2
+The browser exposes a variable `ADLER32`.
 
+When installed globally, npm installs a script `adler32` that computes the
+checksum for a specified file or standard input.
 
-Navigate to the website on the other device (https://alexbay218.github.io/frc-mscout-client-2019/)
+The script will manipulate `module.exports` if available .  This is not always
+desirable.  To prevent the behavior, define `DO_NOT_EXPORT_ADLER`.
 
+## Usage
 
-Fill in the details on the website and click start.
+In all cases, the relevant function takes an argument representing data and an
+optional second argument representing the starting "seed" (for running hash).
 
+The return value is a signed 32-bit integer.
 
-To start match scouting, click the top portion with time, cargo, and hatch displays.
+- `ADLER32.buf(byte array or buffer[, seed])` assumes the argument is a sequence
+  of 8-bit unsigned integers (nodejs `Buffer`, `Uint8Array` or array of bytes).
 
+- `ADLER32.bstr(binary string[, seed])` assumes the argument is a binary string
+  where byte `i` is the low byte of the UCS-2 char: `str.charCodeAt(i) & 0xFF`
 
-Notice the time is now counting down. Click on the other box that corresponds to each action ("Pick up hatch", etc.)
+- `ADLER32.str(string)` assumes the argument is a standard JS string and
+  calculates the hash of the UTF-8 encoding.
 
+For example:
 
-Wait for the time to reach -10, which will automatically end the match (this is the only way currently to end the match).
+```js
+// var ADLER32 = require('adler-32');           // uncomment if in node
+ADLER32.str("SheetJS")                          // 176947863
+ADLER32.bstr("SheetJS")                         // 176947863
+ADLER32.buf([ 83, 104, 101, 101, 116, 74, 83 ]) // 176947863
 
-Now there are three ways to transfer data:
-1) Scan the flashing series of qr codes by using the laptop program (click on Start QR Code Stream)
-2) Click the Single QR button to get the whole match in the form of a single qr code (Note: this may be extremely large if a lot of events happen). Click the button again to switch back. Scan the qr code by clicking on Start Single QR Code button on the laptop program.
-3) When the qr code stream is displayed, the raw text of the match is copied to the clipboard. Get the text to the laptop (email, messaging system, etc.) and enter it into the raw entry text box on the laptop program. Click on the raw entry button to save the data.
-Clicking the back button will take you to and from the qr code display page and it will display the previous match scouted (persists after reloads too)
+adler32 = ADLER32.buf([83, 104])                // 17825980  "Sh"
+adler32 = ADLER32.str("eet", adler32)           // 95486458  "Sheet"
+ADLER32.bstr("JS", adler32)                     // 176947863  "SheetJS"
 
-The data will then be saved as a .fmt file under the data folder in the same folder as the laptop program. I will create documentation as to how it is stored soon, and will be working on programs during the build season to make it useful.
+[ADLER32.str("\u2603"),  ADLER32.str("\u0003")]  // [ 73138686, 262148 ]
+[ADLER32.bstr("\u2603"), ADLER32.bstr("\u0003")] // [ 262148,   262148 ]
+[ADLER32.buf([0x2603]),  ADLER32.buf([0x0003])]  // [ 262148,   262148 ]
+```
 
-## Why this system?
-This system not only operates completely offline (when you visit the website, it automatically caches itself) and uses multiple ways to transfer the data.
-The other part is that it is event-based. By logging the events that take place, you can extract data like cycle times, cycle accuracies, performance during auto/sandstorm, and more. Very few other systems does this and only looks at totals (total hatches on cargo ship in a match). 
-This system and event-based systems are better than regular match scouting systems precisely because it contains the same data + timestamps of events happening. 
-My focus during this season is to write an analytics app to take advantage of event-based match scouting systems and maintain these systems as well. I believe this system is good enough to become the standard for a majority of FRC teams to use. It's time to change match scouting!
-Please share this repo to others!
+## Testing
+
+`make test` will run the nodejs-based test.
+
+To run the in-browser tests, run a local server and go to the `ctest` directory.
+`make ctestserv` will start a python `SimpleHTTPServer` server on port 8000.
+
+To update the browser artifacts, run `make ctest`.
+
+To generate the bits file, use the `adler32` function from python `zlib`:
+
+```python
+>>> from zlib import adler32
+>>> x="foo bar baz٪☃🍣"
+>>> adler32(x)
+1543572022
+>>> adler32(x+x)
+-2076896149
+>>> adler32(x+x+x)
+2023497376
+```
+
+The included `adler32.njs` script can process files or standard input:
+
+```bash
+$ echo "this is a test" > t.txt
+$ bin/adler32.njs t.txt
+726861088
+```
+
+For comparison, the included `adler32.py` script uses python `zlib`:
+
+```bash
+$ bin/adler32.py t.txt
+726861088
+```
+
+## Performance
+
+`make perf` will run algorithmic performance tests (which should justify certain
+decisions in the code).
+
+Bit twiddling is much faster than taking the mod in Safari and Firefox browsers.
+Instead of taking the literal mod 65521, it is faster to keep it in the integers
+by bit-shifting: `65536 ~ 15 mod 65521` so for nonnegative integer `a`:
+
+```
+    a = (a >>> 16) * 65536 + (a & 65535)            [equality]
+    a ~ (a >>> 16) * 15    + (a & 65535) mod 65521
+```
+
+The mod is taken at the very end, since the intermediate result may exceed 65521
+
+## Magic Number
+
+The magic numbers were chosen so as to not overflow a 31-bit integer:
+
+```mathematica
+F[n_] := Reduce[x*(x + 1)*n/2 + (x + 1)*(65521) < (2^31 - 1) && x > 0, x, Integers]
+F[255] (* bstr:  x \[Element] Integers && 1 <= x <= 3854 *)
+F[127] (* ascii: x \[Element] Integers && 1 <= x <= 5321 *)
+```
+
+Subtract up to 4 elements for the Unicode case.
+
+## License
+
+Please consult the attached LICENSE file for details.  All rights not explicitly
+granted by the Apache 2.0 license are reserved by the Original Author.
+
+## Badges
+
+[![Sauce Test Status](https://saucelabs.com/browser-matrix/adler32.svg)](https://saucelabs.com/u/adler32)
+
+[![Build Status](https://travis-ci.org/SheetJS/js-adler32.svg?branch=master)](https://travis-ci.org/SheetJS/js-adler32)
+
+[![Coverage Status](http://img.shields.io/coveralls/SheetJS/js-adler32/master.svg)](https://coveralls.io/r/SheetJS/js-adler32?branch=master)
+
+[![Analytics](https://ga-beacon.appspot.com/UA-36810333-1/SheetJS/js-adler32?pixel)](https://github.com/SheetJS/js-adler32)
