@@ -33,8 +33,8 @@ var translationObj = {
       "Hab Climb Lvl 1",
       "Hab Climb Lvl 2",
       "Hab Climb Lvl 3",
-      "Failed Hab Climb",
-      "Played Defense",
+      "Epic Failure",
+      "Play some D",
       "Crossed Field"
     ],
     ButtonName: [
@@ -55,50 +55,13 @@ var translationObj = {
       "Hab Climb Lvl 1",
       "Lvl 2",
       "Lvl 3",
-      "Failed",
+      "Epic Failure",
       "Crossed Field",
-      "Played Defense"
+      "Played Some D"
     ]
   },
   ES: {
-    Form: [
-      "Numero de Equipo",
-      "Numero de Equipo del Robot",
-      "Prueba",
-      "Practica de Campo",
-      "Match de Practica",
-      "Match de Calificacion",
-      "Cuartos de Final",
-      "Semi-finales",
-      "Final",
-      "Numero de Match",
-      "Iniciar",
-      "Regresar",
-      "Single QR"
-    ],
-    EventTitles: [
-      "Cruzado Linea HAB Niv 1",
-      "Cruzado Linea HAB Niv 2",
-      "Carga Recuperad",
-      "Carga Caida",
-      "Hatch Recuperado",
-      "Hatch Caido",
-      "Puntaje en Cargo Ship",
-      "Fallido en Cargo Ship",
-      "Puntaje en Cohete Niv 1",
-      "Fallido en Cohete Niv 1",
-      "Puntaje en Cohete Niv 2",
-      "Fallido en Cohete Niv 2",
-      "Puntaje en Cohete Niv 3",
-      "Fallido en Cohete Niv 3",
-      "Hab Climb Niv 1",
-      "Hab Climb Niv 2",
-      "Hab Climb Niv 3",
-      "Fallido Hab Climb",
-      "Played Defense",
-      "Crossed Field"
-    ],
-    ButtonName: [
+       ButtonName: [
       "Cruzado Linea HAB Niv 1",
       "Niv 2",
       "Carga Recuperad",
