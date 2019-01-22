@@ -60,30 +60,6 @@ var translationObj = {
       "Played Some D"
     ]
   },
-  ES: {
-       ButtonName: [
-      "Cruzado Linea HAB Niv 1",
-      "Niv 2",
-      "Carga Recuperad",
-      "Carga Caida",
-      "Hatch Recuperado",
-      "Hatch Caido",
-      "Puntaje en Cargo Ship",
-      "Fallido",
-      "Puntaje en Cohete Niv 1",
-      "Fallido",
-      "Puntaje en Cohete Niv 2",
-      "Fallido",
-      "Puntaje en Cohete Niv 3",
-      "Fallido",
-      "Hab Climb Niv 1",
-      "Niv 2",
-      "Niv 3",
-      "Fallido",
-      "Crossed Field",
-      "Played Defense"
-    ]
-  }
 };
 var chosenTranslationObj = {};
 if(localStorage.lang == null) {
