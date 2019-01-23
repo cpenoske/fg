@@ -9,15 +9,6 @@ var initLayoutClass = {
       matchType: "Test",
       matchNumber: 0
     };
-    this.dispElement = document.getElementById("display");
-    this.dispElement.innerHTML = "";
-    this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"sourceTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[0] + "\">");
-    this.dispElement.insertAdjacentHTML("beforeend",
-      "<select class=\"form form-control\" id=\"langSelect\">" +
-        "<option value=\"EN\">EN</option>" +
-        "<option value=\"ES\">ES</option>" +
-      "</select>"
-    );
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend",
       "<select class=\"form form-control\" id=\"matchType\">" +
