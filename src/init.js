@@ -4,7 +4,7 @@ var initLayoutClass = {
   initFunct: function() {
     this.metadataObj = {
       targetTeamNumber: 0,
-      sourceTeamNumber: 4786,
+      sourceTeamNumber: 0,
       dateNumber: 0,
       matchType: "Test",
       matchNumber: 0
