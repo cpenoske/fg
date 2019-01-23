@@ -44,8 +44,6 @@ var initLayoutClass = {
     };
   },
   assignFunct: function() {
-    var tmp = document.getElementById("sourceTeamNumber");
-    this.metadataObj.sourceTeamNumber = Number.parseInt(tmp.value);
     tmp = document.getElementById("targetTeamNumber");
     this.metadataObj.targetTeamNumber = Number.parseInt(tmp.value);
     this.metadataObj.dateNumber = Date.now();
