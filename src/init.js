@@ -13,9 +13,6 @@ var initLayoutClass = {
     this.dispElement.innerHTML = "";
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"sourceTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[0] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend",
-      "<select class=\"form form-control\" id=\"langSelect\">" +
-        "<option value=\"EN\">Ey</option>" +
-      "</select>"
     );
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend",
