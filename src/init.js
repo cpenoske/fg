@@ -37,10 +37,6 @@ var initLayoutClass = {
     if(localStorage.lang != null) {
       langSelect.value = localStorage.lang;
     }
-    langSelect.onchange = () => {
-      localStorage.setItem("lang", langSelect.value);
-      location.reload();
-    };
     var startButton = document.getElementById("startButton");
     startButton.onmouseup = () => {
       this.assignFunct();
