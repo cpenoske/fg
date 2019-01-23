@@ -11,7 +11,6 @@ var initLayoutClass = {
     };
     this.dispElement = document.getElementById("display");
     this.dispElement.innerHTML = "";
-    this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend",
       "<select class=\"form form-control\" id=\"matchType\">" +
         "<option value=\"T\">" + chosenTranslationObj.Form[2] + "</option>" +
@@ -23,6 +22,7 @@ var initLayoutClass = {
         "<option value=\"F\">" + chosenTranslationObj.Form[8] + "</option>" +
       "</select>"
     );
+    this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"matchNumber\" placeholder=\"" + chosenTranslationObj.Form[9] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend", "<button class=\"form btn btn-primary\" id=\"startButton\">" + chosenTranslationObj.Form[10] + "</button>");
     this.dispElement.insertAdjacentHTML("beforeend", "<button class=\"form btn btn-info\" id=\"backButton\">" + chosenTranslationObj.Form[11] + "</button>");
