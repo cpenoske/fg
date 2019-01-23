@@ -14,8 +14,7 @@ var initLayoutClass = {
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"sourceTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[0] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend",
     );
-    this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
-    this.dispElement.insertAdjacentHTML("beforeend",
+    this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">"
       "<select class=\"form form-control\" id=\"matchType\">" +
         "<option value=\"T\">" + chosenTranslationObj.Form[2] + "</option>" +
         "<option value=\"PF\">" + chosenTranslationObj.Form[3] + "</option>" +
