@@ -15,7 +15,6 @@ var initLayoutClass = {
     this.dispElement.insertAdjacentHTML("beforeend",
       "<select class=\"form form-control\" id=\"langSelect\">" +
         "<option value=\"EN\">Ex</option>" +
-        "<option value=\"ES\">ES</option>" +
       "</select>"
     );
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
