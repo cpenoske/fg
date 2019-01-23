@@ -4,15 +4,13 @@ var initLayoutClass = {
   initFunct: function() {
     this.metadataObj = {
       targetTeamNumber: 0,
-      sourceTeamNumber: 0,
+      sourceTeamNumber: 4786,
       dateNumber: 0,
       matchType: "Test",
       matchNumber: 0
     };
     this.dispElement = document.getElementById("display");
     this.dispElement.innerHTML = "";
-    this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"sourceTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[0] + "\">"
-    );
     this.dispElement.insertAdjacentHTML("beforeend", "<input class=\"form form-control\" type=\"number\" id=\"targetTeamNumber\" placeholder=\"" + chosenTranslationObj.Form[1] + "\">");
     this.dispElement.insertAdjacentHTML("beforeend",
       "<select class=\"form form-control\" id=\"matchType\">" +
